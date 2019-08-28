@@ -1,0 +1,20 @@
+// Project utilities
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+
+// Multi amimation class example
+.pulse
+  will-change transform, opacity;
+  $animations(pulse round($transition.duration * 10) infinite, fadeOn round($transition.duration * 3) forwards)
+
+.rotate
+  will-change transform
+  animation rotate linear round($transition.duration * 20) infinite
+
+
+// State
+
+.disabled
+  pointer-events none
+  opacity 0.5
