@@ -65,7 +65,6 @@ class StepForm extends React.Component<Props, State> {
             className="form__prev-button"
             onClick={(e) => {
             e.preventDefault();
-              // this.submit(this.control1Ref.current.value);
               this.goStep(stepId - 1);
             }}
           >{`Back ${STEPS[stepId - 2].name}`}</button>}
@@ -76,7 +75,6 @@ class StepForm extends React.Component<Props, State> {
             className="form__next-button"
             onClick={(e) => {
               e.preventDefault();
-              // this.submit(this.control1Ref.current.value);
               this.goStep(stepId + 1);
             }}
           >

@@ -81,6 +81,37 @@
     textarea
       color $color.black
 
+  &__radios
+    label
+    input
+      margin 0
+    label
+      color $color.black
+      vertical-align top
+      margin-right ($gutter / 2)
+      $text($font-family.sans, $font-size.normal, $font-weight.sans.bold)
+      line-height $input.height
+    input
+      display inline-block
+      margin-top ($gutter / 2)
+      margin-right $gutter * 1.5
+      $size(20px, 20px)
+
+  &__checkbox
+    input
+      margin 0
+    span
+      color $color.black
+      vertical-align top
+      margin-right ($gutter / 2)
+      $text($font-family.sans, $font-size.small, $font-weight.sans.regular)
+      line-height $input.height
+    input
+      display inline-block
+      margin-top ($gutter / 2)
+      margin-right ($gutter / 2)
+      $size(20px, 20px)
+
   h3
     $text($font-family.sans, $font-size.large, $font-weight.sans.bold)
     margin-bottom ($gutter / 2)

@@ -31,6 +31,8 @@ export const STEPS : StepType[] = [
 export const FORM : StepFormType = {
   control1: '',
   control2: '',
+  control3: '',
+  control4: false,
 };
 
 export const INITIAL_STATE : StoreType = {
