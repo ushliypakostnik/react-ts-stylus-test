@@ -51,9 +51,9 @@ class Step1 extends React.Component<Props> {
             onChange={ this.props.handleChange3 }
             onClick={(e) => {
               const element = (e.target as Element);
+              const value = element.getAttribute('value');
               const parent = element.parentElement;
               const childrens = parent.children;
-              console.log(childrens);
               const arr = [];
               for (let child in childrens) {
                 if (typeof(childrens[child]) === 'object' &&
@@ -61,7 +61,6 @@ class Step1 extends React.Component<Props> {
                   arr.push(childrens[child]);
                 }
               }
-              console.log(arr);
               arr.forEach(el => {
                 el.removeAttribute('checked');
               });
@@ -70,7 +69,6 @@ class Step1 extends React.Component<Props> {
               } else {
                 element.setAttribute('checked', 'checked');
               }
-              const value = element.getAttribute('value');
               if (value) {
                 parent.setAttribute('data-value', value);
               }

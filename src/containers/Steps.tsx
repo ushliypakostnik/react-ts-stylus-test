@@ -50,7 +50,6 @@ class StepForm extends React.Component<Props, State> {
     if (this.ref2) this.ref2.value = this.props.stepForm.control2;
     if (this.ref3) {
       const value = this.props.stepForm.control3;
-      console.log(value);
       if (value && value !== '') {
         this.ref3.setAttribute('data-value', value);
         const childrens = this.ref3.children;
