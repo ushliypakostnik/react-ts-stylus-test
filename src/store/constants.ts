@@ -1,6 +1,7 @@
 import {
   StoreType,
   StepType,
+  StepFormType,
   LocalType,
 } from './types';
 
@@ -27,23 +28,20 @@ export const STEPS : StepType[] = [
   },
 ];
 
+export const FORM : StepFormType = {
+  control1: '',
+  control2: '',
+};
+
 export const INITIAL_STATE : StoreType = {
   rootReducer: {
+    stepId: STEPS[0].id,
     stepForm: {
-      stepId: STEPS[0].id,
-      step1: {
-        control1: '',
-      },
-      step2: {
-        control1: '',
-      },
-      step3: {
-        control1: '',
-      },
-      total: {}
+      ...FORM,
     },
   },
 };
 
 export const LOCAL : LocalType = {
+  stepForm: 'stepForm',
 }

@@ -21,31 +21,22 @@ if (process.env.NODE_ENV !== 'production') {
 const localStorageMiddleware = ({getState} : any) => {
   return (next : any) => (action: any) => {
     const result = next(action);
-    /*
-    if (getState().rootReducer.auth.isAuth) {
-      localStorage.setItem(LOCAL.PROFILE, JSON.stringify(
-          getState().rootReducer.user.profile,
-      ));
-    }*/
+    localStorage.setItem(LOCAL.stepForm, JSON.stringify(
+        getState().rootReducer,
+    ));
     return result;
   };
 };
 middlewares.push(localStorageMiddleware);
 
 const reHydrateStore = (state: StoreType) => {
-  /*if (localStorage.getItem(LOCAL.PROFILE) !== null) {
-    const localData = JSON.parse(localStorage.getItem(LOCAL.PROFILE) || '{}');
+  if (localStorage.getItem(LOCAL.stepForm) !== null) {
+    const localData = JSON.parse(localStorage.getItem(LOCAL.stepForm) || '{}');
     const _state = Object.assign({}, state, {
-      rootReducer: {
-        ...state.rootReducer,
-        user: {
-          ...state.rootReducer.user,
-          profile: localData,
-        },
-      },
+      rootReducer: localData,
     });
     return _state;
-  }*/
+  }
   return state;
 };
 

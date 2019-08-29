@@ -2,13 +2,13 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { StoreType } from '../store/types';
-
-import { history } from '../store/store';
 
 import { STEPS } from '../store/constants';
-
+import { StoreType } from '../store/types';
+import { history } from '../store/store';
 import { setStep } from '../store/actions';
+
+import Steps from './Steps';
 
 interface StateToProps {
   stepId : number;
@@ -27,22 +27,23 @@ const initialState = {
 type State = Readonly<typeof initialState>;
 
 class StepForm extends React.Component<Props, State> {
-  private control1Ref: React.RefObject<HTMLInputElement>;
 
   public static getDerivedStateFromProps = (nextProps : Props, prevState : State) => ({
     stepId: nextProps.stepId,
   });
 
-  constructor(props) {
-    super(props);
-
-    this.control1Ref = React.createRef();
-  }
-
   readonly state : State = initialState;
 
+  // Connecting native browser navigation
+  public componentDidMount() {
+    history.listen((location: any) : void => {
+      const step = STEPS.filter(step => step.path === location.pathname);
+      const stepId = step[0].id;
+      if (stepId !== this.props.stepId) this.props.setStep(stepId);
+    });
+  };
+
   private goStep = (value: number) : void => {
-    this.props.setStep(value);
     history.push(STEPS[value - 1].path);
   };
 
@@ -51,12 +52,12 @@ class StepForm extends React.Component<Props, State> {
 
     return (
       <form className="form">
-        <input
-          type="text"
-          aria-label="input"
-          placeholder="input value"
-          ref={ this.control1Ref }
-        />
+        <h3>{stepId === STEPS.length ?
+              STEPS[STEPS.length - 1].name :
+              `Step ${STEPS[stepId - 1].name}`}</h3>
+
+        <Steps stepId={ stepId } />
+
         {stepId !== STEPS[0].id &&
           <button
             type="button"
@@ -89,7 +90,7 @@ class StepForm extends React.Component<Props, State> {
 };
 
 const mapStateToProps = (state : StoreType) : StateToProps => ({
-  stepId: state.rootReducer.stepForm.stepId,
+  stepId: state.rootReducer.stepId,
 });
 
 const mapDispatchToProps = (dispatch : Dispatch) : DispatchProps => ({

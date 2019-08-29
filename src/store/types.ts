@@ -1,18 +1,7 @@
 export interface StoreType {
   readonly rootReducer: {
-    readonly stepForm: {
-      stepId: number;
-      step1: {
-        control1: string;
-      };
-      step2: {
-        control1: string;
-      };
-      step3: {
-        control1: string;
-      };
-      total: {};
-    }
+    readonly stepId : number;
+    readonly stepForm : StepFormType;
   };
   readonly router? : any;
 };
@@ -25,5 +14,9 @@ export interface StepType {
 
 export interface LocalType {
   readonly [key: string] : string;
+};
+
+export interface StepFormType {
+  readonly [key: string] : any;
 };
 

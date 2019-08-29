@@ -4,42 +4,36 @@ import {
   Route,
   Redirect,
   Switch,
-  RouteComponentProps,
   RouteProps,
 } from "react-router-dom";
 
 import { connect } from 'react-redux';
-import { StoreType } from '../store/types';
+import { Dispatch } from 'redux';
 
 import { STEPS } from '../store/constants';
+import { history } from '../store/store';
+import { setStep } from '../store/actions';
 
 import StepForm from './StepForm';
 import Page404 from '../components/Page404';
 
-const Index : React.SFC = () => {
+// Redirect on first step of form from index route of app
+const IndexRoute : React.SFC<RouteProps & any> = props => {
+  props.setStep(STEPS[0].id);
   return <Redirect to={ STEPS[0].path } />
 }
 
-interface Props {
-};
+interface DispatchProps {
+  setStep : (stepId: number) => void;
+}
 
-const initialState = {
-};
-
-type State = Readonly<typeof initialState>;
-
-class App extends React.Component<Props, State> {
-
-  public static getDerivedStateFromProps = (nextProps : Props, prevState : State) => ({
-  });
-
-  readonly state : State = initialState;
+class App extends React.Component<DispatchProps> {
 
   public render() {
     return (
       <div className="page">
         <Switch>
-          <Route exact path="/" component={ Index } />
+          <IndexRoute exact path="/" setStep={ this.props.setStep } />
           {STEPS.map((page, index) => {
             return <Route
                      exact
@@ -54,7 +48,8 @@ class App extends React.Component<Props, State> {
   }
 };
 
-const mapStateToProps = (state : StoreType) : State => ({
+const mapDispatchToProps = (dispatch : Dispatch) : DispatchProps => ({
+  setStep: (stepId : number) => dispatch(setStep(stepId)),
 });
 
-export default connect(null, null)(App);
+export default connect(null, mapDispatchToProps)(App);

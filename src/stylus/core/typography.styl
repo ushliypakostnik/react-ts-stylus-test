@@ -21,10 +21,10 @@ $letter-spacing = {
 $font-size = {
   base: 16px,
   coefficient: {
-    large: 1.5,
+    large: 1.7,
     normal: 1.2,
-    small: 1.1,
-    xsmall: 0.8
+    small: 1,
+    xsmall: 0.9
   }
 }
 
@@ -93,19 +93,19 @@ h1
     $text($font-family.sans, $font-size.normal, $font-weight.sans.bold)
 
 h2
-  $text($font-family.sans, $font-size.normal, $font-weight.sans.regular)
+  $text($font-family.sans, $font-size.large, $font-weight.sans.regular)
 
 h3
-  $text($font-family.sans, $font-size.small, $font-weight.sans.regular)
+  $text($font-family.sans, $font-size.normal, $font-weight.sans.bold)
 
 h4
-  $text($font-family.sans, round($font-size.small * 0.9), $font-weight.sans.bold)
+  $text($font-family.sans, $font-size.small, $font-weight.sans.bold)
 
 h5
-  $text($font-family.sans, round($font-size.small * 0.75), $font-weight.sans.regular)
+  $text($font-family.sans, $font-size.xsmall, $font-weight.sans.bold)
 
 h6
-  $text($font-family.sans, round($font-size.xsmall * 0.74), $font-weight.sans.regular)
+  $text($font-family.sans, $font-size.xsmall, $font-weight.sans.regular)
 
 h1, h2, h3
   &:first-child

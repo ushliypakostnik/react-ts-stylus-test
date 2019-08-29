@@ -11,7 +11,7 @@
   min-height 100vh
   display flex
   flex-direction column
-  justify-content center
+  justify-content flex-start
   align-items center
   padding-top $gutter * 2
   padding-bottom $gutter * 2
@@ -38,13 +38,14 @@
 
 .form
   position relative
-  padding $gutter
+  padding $gutter $gutter $gutter * 4 $gutter
   margin-bottom 8%
   background $color.white
   min-height 300px
-  width 55vw
+  width 50vw
   min-width 300px
   max-width 600px
+  will-change contens
   border-radius $border.radius.large
   box-shadow $shadow.coords-x $shadow.coords-y $shadow.size $shadow.stretch $shadow.color
 
@@ -66,3 +67,20 @@
   &__next-button
     right $gutter
     $btn-color($color.white, $color.primary)
+
+  &__group
+    margin-bottom $gutter
+    label
+      opacity 0.66
+      display inline-block
+      margin-bottom ($gutter / 4)
+      $text($font-family.sans, $font-size.xsmall, $font-weight.sans.bold)
+    input
+      width 100%
+    input
+    textarea
+      color $color.black
+
+  h3
+    $text($font-family.sans, $font-size.large, $font-weight.sans.bold)
+    margin-bottom ($gutter / 2)
