@@ -53,9 +53,7 @@ class Step1 extends React.Component<Props> {
             className="form__radios"
             ref={ this.props.ref3 }
             onChange={ this.props.handleChange3 }
-            onClick={(e) => {
-               onClickRadios(e);
-            }}
+            onClick={(e) => { onClickRadios(e); }}
           >
             <label htmlFor="option1">A</label>
             <input type="radio" id="option1"
