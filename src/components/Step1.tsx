@@ -67,9 +67,7 @@ class Step1 extends React.Component<Props> {
           </div>
         </fieldset>
         <fieldset className="form__group">
-          <div
-            className="form__checkbox"
-          >
+          <div className="form__checkbox">
             <label
               htmlFor="cash"
             >Payment</label>
@@ -82,7 +80,7 @@ class Step1 extends React.Component<Props> {
                   onClickCheckbox(e);
                   this.props.handleChange4(e);
                 }}
-              /><span>Cash payment ???</span>
+              /><span>Cash payment ?</span>
             </div>
           </div>
         </fieldset>

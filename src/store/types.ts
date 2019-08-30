@@ -20,7 +20,17 @@ export interface AnyObjectType {
   readonly [key: string] : any;
 };
 
-export interface StepFormType extends AnyObjectType {};
+export interface StepFormType {
+  readonly name : string;
+  readonly ammount : number | null;
+  readonly options: string | null;
+  readonly cash: boolean;
+  readonly color: string;
+  readonly height: number | null;
+  readonly description: string;
+  readonly width: number | null;
+  readonly delivery: boolean | null;
+}
 
 interface DownshiftType {
   readonly value: string;

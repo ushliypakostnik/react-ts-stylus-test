@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Downshift from 'downshift';
 import Select from 'react-select';
 
@@ -76,7 +75,9 @@ class Step2 extends React.Component<Props> {
           </Downshift>
         </fieldset>
         <fieldset className="form__group">
+          <label htmlFor="height">Product height</label>
           <Select
+            id="height"
             placeholder="Select height"
             options={ CONTROLS.select1 }
             className='react-select-container'

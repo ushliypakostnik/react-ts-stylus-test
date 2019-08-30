@@ -1,0 +1,39 @@
+// Page layout
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+
+#root
+  min-height 100%
+
+.page
+  background $color.light
+  min-height 100vh
+  display flex
+  flex-direction column
+  justify-content flex-start
+  align-items center
+  padding-top $gutter * 2
+  padding-bottom $gutter * 2
+
+  +$xs()
+    padding-top $gutter
+    padding-bottom $gutter
+
+  &__center-wrapper
+    margin-top -12%
+
+  &__center-message
+    width 300px
+    text-align center
+
+  &--page404
+    &__logo
+      $size(90px, 90px)
+
+    &__numbers
+      margin-top 0
+      margin-bottom 0
+      font-size round($font-size.large * 3)
+
+

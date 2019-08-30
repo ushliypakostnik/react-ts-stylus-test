@@ -19,11 +19,9 @@ interface DispatchProps {
   setStep : (stepId: number) => void;
 }
 
-interface Props extends StateToProps, DispatchProps {
-};
+interface Props extends StateToProps, DispatchProps {};
 
-const initialState = {
-};
+const initialState = {};
 
 type State = Readonly<typeof initialState>;
 
@@ -65,7 +63,6 @@ class StepForm extends React.Component<Props, State> {
         {stepId !== STEPS[0].id &&
           <button
             type="button"
-            role="button"
             className="form__prev-button"
             onClick={(e) => {
             e.preventDefault();
@@ -75,7 +72,6 @@ class StepForm extends React.Component<Props, State> {
         {stepId !== STEPS.length &&
           <button
             type="button"
-            role="button"
             className="form__next-button"
             onClick={(e) => {
               e.preventDefault();
@@ -93,7 +89,7 @@ class StepForm extends React.Component<Props, State> {
 
 const mapStateToProps = (state : StoreType) : StateToProps => ({
   stepId: state.rootReducer.stepId,
-  color: state.rootReducer.stepForm.control5,
+  color: state.rootReducer.stepForm.color,
 });
 
 const mapDispatchToProps = (dispatch : Dispatch) : DispatchProps => ({

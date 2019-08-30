@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { STEPS } from '../store/constants';
-import { history } from '../store/store';
 import { setStep } from '../store/actions';
 
 import StepForm from './StepForm';

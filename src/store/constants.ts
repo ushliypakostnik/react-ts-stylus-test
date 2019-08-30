@@ -13,15 +13,25 @@ export const STEPS : StepType[] = [
   { id: 4, name: 'Total', path: '/total', },
 ];
 
+// 1. product name text input
+// 2. ammount number text input
+// 3. radio buttons group
+// 4. cash payment checkbox
+// 5. color downshift select
+// 6. height select
+// 7. description textarea input
+// 8. width select
+// 9. optional delivery checkbox
 export const FORM : StepFormType = {
-  control1: '',
-  control2: '',
-  control3: '',
-  control4: false,
-  control5: '',
-  control6: null,
-  control7: '',
-  control8: null,
+  name: '',
+  ammount: null,
+  options: '',
+  cash: false,
+  color: '',
+  height: null,
+  description: '',
+  width: null,
+  delivery: false,
 };
 
 export const INITIAL_STATE : StoreType = {
