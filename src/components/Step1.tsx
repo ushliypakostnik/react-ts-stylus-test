@@ -5,8 +5,6 @@ import {
   onClickRadios,
 } from '../utilities/_helpers';
 
-import InputText from './elements/InputText';
-
 interface Props {
   ref1 : React.Ref<HTMLInputElement>;
   ref2 : React.Ref<HTMLInputElement>;
@@ -19,18 +17,20 @@ interface Props {
 };
 
 class Step1 extends React.Component<Props> {
-  private refLink1 : null | HTMLInputElement = null;
 
   public render() {
     return (
       <React.Fragment>
-        <InputText
-            label="Product name"
+        <fieldset className="form__group">
+          <label htmlFor="name">Product name</label>
+          <input
             id="name"
+            type="text"
             placeholder="Enter product name"
-            refLink={ refLink1 => (this.refLink = refLink1) }
-            handleChange={ this.props.handleChange1 }
-        />
+            ref={ this.props.ref1 }
+            onChange={ this.props.handleChange1 }
+          />
+        </fieldset>
         <fieldset className="form__group">
           <label htmlFor="amount">Ammount</label>
           <input
