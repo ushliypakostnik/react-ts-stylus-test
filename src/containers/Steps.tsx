@@ -39,7 +39,6 @@ class StepForm extends React.Component<Props, State> {
   private ref2 : null | HTMLInputElement = null;
   private ref3 : null | HTMLInputElement = null;
   private ref4 : null | HTMLInputElement = null;
-  private ref5 : null | HTMLFieldSetElement = null;
 
   public static getDerivedStateFromProps = (nextProps : Props, prevState : State) => ({
     stepForm: nextProps.stepForm,
@@ -102,10 +101,11 @@ class StepForm extends React.Component<Props, State> {
     const _value = value === 'true' ? true : false;
     this.handleChange(Object.keys(FORM)[3], _value);
   };
-
   private handleChange5 = (color) => {
-    console.log('AAAAA', color);
     this.handleChange(Object.keys(FORM)[4], color);
+  };
+  private handleChange6 = (height) => {
+    this.handleChange(Object.keys(FORM)[5], height);
   };
 
   public render() {
@@ -127,7 +127,9 @@ class StepForm extends React.Component<Props, State> {
          {stepId === STEPS[1].id &&
           <Step2
             handleChange5={ this.handleChange5 }
-            ref5={ ref5 => (this.ref5 = ref5) }
+            handleChange6={ this.handleChange6 }
+            initialDownshiftValue={ this.props.stepForm.control5 }
+            initialSelectValue={this.props.stepForm.control6 }
           />}
       </React.Fragment>
     );

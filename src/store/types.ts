@@ -16,7 +16,23 @@ export interface LocalType {
   readonly [key: string] : string;
 };
 
-export interface StepFormType {
+export interface AnyObjectType {
   readonly [key: string] : any;
 };
 
+export interface StepFormType extends AnyObjectType {};
+
+interface DownshiftType {
+  readonly value: string;
+  readonly color: string;
+};
+
+interface SelectType {
+  readonly value: number;
+  readonly label: string;
+};
+
+export interface ControlsType extends AnyObjectType {
+  readonly downshift1: DownshiftType[];
+  readonly select1: SelectType[];
+};

@@ -135,3 +135,52 @@
   h3
     $text($font-family.sans, $font-size.large, $font-weight.sans.bold)
     margin-bottom ($gutter / 2)
+
+// React select customization
+.react-select
+  &__control
+  &__value-container
+    height $input.height
+  &__control
+    position relative
+    z-index $layout.dropdown - 9 !important
+    border-color $color.border !important
+    $text($font-family.sans, $font-size.normal, $font-weight.sans.regular)
+    &:hover
+    &:focus
+    &--is-focused
+      border-color $color.border !important
+      box-shadow none !important
+  &__value-container
+    padding 0 ($gutter / 2) !important
+    &
+    &:hover
+    &:focus
+      outline none !important
+  &__placeholder
+    margin 0 !important
+    color $color.placeholder !important
+    line-height $input.height !important
+  &__indicator-separator
+    display none !important
+  &__indicator
+    color: transparentify($color.text, $color.text, 0.5) !important
+    $size(40px, 40px)
+  &__menu
+    z-index $layout.dropdown - 10 !important
+    margin 0 !important
+    top $input.height - 1 !important
+    padding 0 !important
+    border 1px solid $color.border
+    border-radius $border.radius.small !important
+    box-shadow $shadow.coords-x $shadow.coords-y $shadow.size $shadow.stretch $shadow.color !important
+  &__menu-list
+    padding 0 !important
+    color $color.black !important
+    $text($font-family.sans, $font-size.small, $font-weight.sans.regular)
+  &__option--is-focused
+    background transparentify($color.primary, $color.primary, 0.33) !important
+  &__option--is-selected
+    background $color.primary !important
+
+
