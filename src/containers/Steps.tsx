@@ -11,11 +11,16 @@ import {
   STEPS,
   FORM
 } from '../store/constants';
-
 import { setForm } from '../store/actions';
+
+import {
+  initRadios,
+  initCheckbox,
+} from '../utilities/_helpers';
 
 import Step1 from '../components/Step1';
 import Step2 from '../components/Step2';
+import Step3 from '../components/Step3';
 
 interface StateToProps {
   stepForm : StepFormType;
@@ -39,6 +44,7 @@ class StepForm extends React.Component<Props, State> {
   private ref2 : null | HTMLInputElement = null;
   private ref3 : null | HTMLInputElement = null;
   private ref4 : null | HTMLInputElement = null;
+  private ref5 : null | HTMLTextAreaElement = null;
 
   public static getDerivedStateFromProps = (nextProps : Props, prevState : State) => ({
     stepForm: nextProps.stepForm,
@@ -49,37 +55,9 @@ class StepForm extends React.Component<Props, State> {
   public componentDidMount() {
     if (this.ref1) this.ref1.value = this.props.stepForm.control1;
     if (this.ref2) this.ref2.value = this.props.stepForm.control2;
-    if (this.ref3) {
-      const value = this.props.stepForm.control3;
-      if (value && value !== '') {
-        this.ref3.setAttribute('data-value', value);
-        const childrens = this.ref3.children;
-        const arr = [];
-        for (let child in childrens) {
-          if (typeof(childrens[child]) === 'object' &&
-            childrens[child].getAttribute('type') === 'radio') {
-            arr.push(childrens[child]);
-          }
-        }
-        arr.forEach(el => {
-          if (el.getAttribute('value') === value) {
-            el.setAttribute('checked', 'checked');
-          } else {
-            el.removeAttribute('checked');
-          }
-        });
-      }
-    }
-    if (this.ref4) {
-      const value =  this.props.stepForm.control4;
-      if (value) {
-        this.ref4.setAttribute('checked', 'checked');
-        this.ref4.parentElement.parentElement.setAttribute('data-value', 'true');
-      } else {
-        this.ref4.removeAttribute('checked');
-        this.ref4.parentElement.parentElement.setAttribute('data-value', 'false');
-      }
-    }
+    if (this.ref3) initRadios(this.ref3, this.props.stepForm.control3);
+    if (this.ref4) initCheckbox(this.ref4, this.props.stepForm.control4);
+    if (this.ref5) this.ref5.value = this.props.stepForm.control7;
   };
 
   private handleChange = (key: string, value: any) : void => {
@@ -107,6 +85,12 @@ class StepForm extends React.Component<Props, State> {
   private handleChange6 = (height) => {
     this.handleChange(Object.keys(FORM)[5], height);
   };
+  private handleChange7 = () => {
+    this.handleChange(Object.keys(FORM)[6], this.ref5.value);
+  };
+  private handleChange8 = (width) => {
+    this.handleChange(Object.keys(FORM)[7], width);
+  };
 
   public render() {
     const { stepId } = this.props;
@@ -124,12 +108,20 @@ class StepForm extends React.Component<Props, State> {
             ref3={ ref3 => (this.ref3 = ref3) }
             ref4={ ref4 => (this.ref4 = ref4) }
           />}
-         {stepId === STEPS[1].id &&
+        {stepId === STEPS[1].id &&
           <Step2
             handleChange5={ this.handleChange5 }
             handleChange6={ this.handleChange6 }
-            initialDownshiftValue={ this.props.stepForm.control5 }
-            initialSelectValue={this.props.stepForm.control6 }
+            initialDownshift1Value={ this.props.stepForm.control5 }
+            initialSelect1Value={this.props.stepForm.control6 }
+          />}
+        {stepId === STEPS[2].id &&
+          <Step3
+            handleChange7={ this.handleChange7 }
+            handleChange8={ this.handleChange8 }
+            ref5={ ref5 => (this.ref5 = ref5) }
+            initialSelect2Value={this.props.stepForm.control8 }
+            delivery={ true }
           />}
       </React.Fragment>
     );

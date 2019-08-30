@@ -20,6 +20,8 @@ export const FORM : StepFormType = {
   control4: false,
   control5: '',
   control6: null,
+  control7: '',
+  control8: null,
 };
 
 export const INITIAL_STATE : StoreType = {
@@ -36,7 +38,7 @@ export const LOCAL : LocalType = {
 };
 
 export const CONTROLS : ControlsType = {
- downshift1: [
+  downshift1: [
     { value: 'red', color: '#ffa9b2', },
     { value: 'blue', color: '#93eaff', },
     { value: 'green', color: '#6eff96', },
@@ -47,5 +49,9 @@ export const CONTROLS : ControlsType = {
     { value: 2, label: '2m', },
     { value: 3, label: '3m', },
     { value: 6, label: '6m', }
+  ],
+  select2: [
+    { value: 1000, label: '1000', },
+    { value: 4000, label: '4000x', },
   ],
 };

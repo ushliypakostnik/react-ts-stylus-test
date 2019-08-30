@@ -80,15 +80,18 @@ button
 // Controls
 
 input
-  height $input.height;
+textarea
   border 1px solid $color.border
   border-radius $border.radius.small
   padding 0 ($gutter / 2)
   $text($font-family.sans, $font-size.normal, $font-weight.sans.regular)
 
+input
+  height $input.height;
+
 textarea
-  width 100%
-  max-width 100%
+  display: block
+  resize: none
 
 
 // Lists

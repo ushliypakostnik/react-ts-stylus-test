@@ -1,5 +1,12 @@
 import React from 'react';
 
+import {
+  onClickCheckbox,
+  onClickRadios,
+} from '../utilities/_helpers';
+
+import InputText from './elements/InputText';
+
 interface Props {
   ref1 : React.Ref<HTMLInputElement>;
   ref2 : React.Ref<HTMLInputElement>;
@@ -12,20 +19,18 @@ interface Props {
 };
 
 class Step1 extends React.Component<Props> {
+  private refLink1 : null | HTMLInputElement = null;
 
   public render() {
     return (
       <React.Fragment>
-        <fieldset className="form__group">
-          <label htmlFor="name">Product name</label>
-          <input
+        <InputText
+            label="Product name"
             id="name"
-            type="text"
             placeholder="Enter product name"
-            ref={ this.props.ref1 }
-            onChange={ this.props.handleChange1 }
-          />
-        </fieldset>
+            refLink={ refLink1 => (this.refLink = refLink1) }
+            handleChange={ this.props.handleChange1 }
+        />
         <fieldset className="form__group">
           <label htmlFor="amount">Ammount</label>
           <input
@@ -35,7 +40,6 @@ class Step1 extends React.Component<Props> {
             ref={ this.props.ref2 }
             onChange={ this.props.handleChange2 }
             onKeyDown={(e) => {
-              const value = (e.target as HTMLInputElement).value;
               if (['e', '+', '-'].includes(e.key)) {
                 e.preventDefault();
               }
@@ -50,28 +54,7 @@ class Step1 extends React.Component<Props> {
             ref={ this.props.ref3 }
             onChange={ this.props.handleChange3 }
             onClick={(e) => {
-              const element = (e.target as Element);
-              const value = element.getAttribute('value');
-              const parent = element.parentElement;
-              const childrens = parent.children;
-              const arr = [];
-              for (let child in childrens) {
-                if (typeof(childrens[child]) === 'object' &&
-                  childrens[child].getAttribute('type') === 'radio') {
-                  arr.push(childrens[child]);
-                }
-              }
-              arr.forEach(el => {
-                el.removeAttribute('checked');
-              });
-              if (element.getAttribute('checked') === 'checked') {
-                element.removeAttribute('checked');
-              } else {
-                element.setAttribute('checked', 'checked');
-              }
-              if (value) {
-                parent.setAttribute('data-value', value);
-              }
+               onClickRadios(e);
             }}
           >
             <label htmlFor="option1">A</label>
@@ -98,17 +81,7 @@ class Step1 extends React.Component<Props> {
                 id="cash"
                 ref={ this.props.ref4 }
                 onClick={(e) => {
-                  const element = (e.target as Element);
-                  let value;
-                  if (element.getAttribute('checked') === 'checked') {
-                    element.removeAttribute('checked');
-                    value = false;
-                  } else {
-                    element.setAttribute('checked', 'checked');
-                    value = true;
-                  }
-                  const parent = element.parentElement.parentElement;
-                  parent.setAttribute('data-value', value);
+                  onClickCheckbox(e);
                   this.props.handleChange4(e);
                 }}
               /><span>Cash payment ???</span>

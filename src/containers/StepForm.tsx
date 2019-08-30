@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { STEPS } from '../store/constants';
+import { STEPS, CONTROLS } from '../store/constants';
 import { StoreType } from '../store/types';
 import { history } from '../store/store';
 import { setStep } from '../store/actions';
@@ -12,6 +12,7 @@ import Steps from './Steps';
 
 interface StateToProps {
   stepId : number;
+  color: string;
 };
 
 interface DispatchProps {
@@ -30,6 +31,7 @@ class StepForm extends React.Component<Props, State> {
 
   public static getDerivedStateFromProps = (nextProps : Props, prevState : State) => ({
     stepId: nextProps.stepId,
+    color: nextProps.color,
   });
 
   readonly state : State = initialState;
@@ -48,10 +50,12 @@ class StepForm extends React.Component<Props, State> {
   };
 
   public render() {
-    const { stepId } = this.props;
+    const { stepId, color } = this.props;
+    const _color = color !== '' ? CONTROLS.downshift1.filter(item => item.value === color)[0].color : '#ffffff';
+    const style = (_color !== '' && stepId === STEPS[2].id) ? { background: _color } : { background: '#ffffff'};
 
     return (
-      <form className="form">
+      <form className="form" style={ style }>
         <h3>{stepId === STEPS.length ?
               STEPS[STEPS.length - 1].name :
               `Step ${STEPS[stepId - 1].name}`}</h3>
@@ -89,6 +93,7 @@ class StepForm extends React.Component<Props, State> {
 
 const mapStateToProps = (state : StoreType) : StateToProps => ({
   stepId: state.rootReducer.stepId,
+  color: state.rootReducer.stepForm.control5,
 });
 
 const mapDispatchToProps = (dispatch : Dispatch) : DispatchProps => ({

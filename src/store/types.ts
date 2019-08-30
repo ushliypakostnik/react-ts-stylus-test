@@ -35,4 +35,5 @@ interface SelectType {
 export interface ControlsType extends AnyObjectType {
   readonly downshift1: DownshiftType[];
   readonly select1: SelectType[];
+  readonly select2: SelectType[];
 };

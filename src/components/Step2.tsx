@@ -6,8 +6,8 @@ import Select from 'react-select';
 import { CONTROLS } from '../store/constants';
 
 interface Props {
-  initialDownshiftValue: string;
-  initialSelectValue: number;
+  initialDownshift1Value: string;
+  initialSelect1Value: number;
   handleChange5 : React.ChangeEventHandler<HTMLElement>;
   handleChange6 : React.ChangeEventHandler<HTMLElement>;
 };
@@ -15,8 +15,8 @@ interface Props {
 class Step2 extends React.Component<Props> {
 
   public render() {
-    const { initialSelectValue } = this.props;
-    const _initialSelectValue = CONTROLS.select1.filter(option => option.value === initialSelectValue)[0];
+    const { initialSelect1Value } = this.props;
+    const _initialSelectValue = CONTROLS.select1.filter(option => option.value === initialSelect1Value)[0];
 
     return (
       <React.Fragment>
@@ -26,7 +26,7 @@ class Step2 extends React.Component<Props> {
                 this.props.handleChange5(selection.value);
               }}
               itemToString={item => (item ? item.value : '') }
-              initialInputValue={ this.props.initialDownshiftValue }
+              initialInputValue={ this.props.initialDownshift1Value }
             >
               {({
                 getInputProps,
@@ -75,7 +75,7 @@ class Step2 extends React.Component<Props> {
               )}
           </Downshift>
         </fieldset>
-        <fieldset className="form__group form__select">
+        <fieldset className="form__group">
           <Select
             placeholder="Select height"
             options={ CONTROLS.select1 }
