@@ -33,6 +33,7 @@ export const FORM : StepFormType = {
   control2: '',
   control3: '',
   control4: false,
+  control5: '',
 };
 
 export const INITIAL_STATE : StoreType = {

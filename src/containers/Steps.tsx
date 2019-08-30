@@ -15,6 +15,7 @@ import {
 import { setForm } from '../store/actions';
 
 import Step1 from '../components/Step1';
+import Step2 from '../components/Step2';
 
 interface StateToProps {
   stepForm : StepFormType;
@@ -34,10 +35,11 @@ const initialState = {
 type State = Readonly<typeof initialState>;
 
 class StepForm extends React.Component<Props, State> {
-  private ref1: null | HTMLInputElement = null;
-  private ref2: null | HTMLInputElement = null;
-  private ref3: null | HTMLInputElement = null;
-  private ref4: null | HTMLInputElement = null;
+  private ref1 : null | HTMLInputElement = null;
+  private ref2 : null | HTMLInputElement = null;
+  private ref3 : null | HTMLInputElement = null;
+  private ref4 : null | HTMLInputElement = null;
+  private ref5 : null | HTMLFieldSetElement = null;
 
   public static getDerivedStateFromProps = (nextProps : Props, prevState : State) => ({
     stepForm: nextProps.stepForm,
@@ -101,6 +103,11 @@ class StepForm extends React.Component<Props, State> {
     this.handleChange(Object.keys(FORM)[3], _value);
   };
 
+  private handleChange5 = (color) => {
+    console.log('AAAAA', color);
+    this.handleChange(Object.keys(FORM)[4], color);
+  };
+
   public render() {
     const { stepId } = this.props;
 
@@ -116,6 +123,11 @@ class StepForm extends React.Component<Props, State> {
             ref2={ ref2 => (this.ref2 = ref2) }
             ref3={ ref3 => (this.ref3 = ref3) }
             ref4={ ref4 => (this.ref4 = ref4) }
+          />}
+         {stepId === STEPS[1].id &&
+          <Step2
+            handleChange5={ this.handleChange5 }
+            ref5={ ref5 => (this.ref5 = ref5) }
           />}
       </React.Fragment>
     );
