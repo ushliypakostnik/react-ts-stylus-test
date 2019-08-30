@@ -12,7 +12,8 @@ import Steps from './Steps';
 
 interface StateToProps {
   stepId : number;
-  color: string;
+  color : string;
+  pathname : string;
 };
 
 interface DispatchProps {
@@ -30,25 +31,25 @@ class StepForm extends React.Component<Props, State> {
   public static getDerivedStateFromProps = (nextProps : Props, prevState : State) => ({
     stepId: nextProps.stepId,
     color: nextProps.color,
+    pathname: nextProps.pathname,
   });
 
   readonly state : State = initialState;
 
-  // Connecting native browser navigation
-  public componentDidMount() {
-    history.listen((location: any) : void => {
-      const step = STEPS.filter(step => step.path === location.pathname);
-      const stepId = step[0].id;
-      if (stepId !== this.props.stepId) this.props.setStep(stepId);
-    });
-  };
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.pathname) {
+      let step = STEPS.filter(step => step.path === this.props.pathname)[0].id;
+      this.props.setStep(step);
+    }
+  }
 
   private goStep = (value: number) : void => {
     history.push(STEPS[value - 1].path);
+    this.props.setStep(value);
   };
 
   public render() {
-    const { stepId, color } = this.props;
+    const { stepId, color, pathname } = this.props;
     const _color = color !== '' ? CONTROLS.downshift1.filter(item => item.value === color)[0].color : '#ffffff';
     const style = (_color !== '' && stepId === STEPS[2].id) ? { background: _color } : { background: '#ffffff'};
 
@@ -90,6 +91,7 @@ class StepForm extends React.Component<Props, State> {
 const mapStateToProps = (state : StoreType) : StateToProps => ({
   stepId: state.rootReducer.stepId,
   color: state.rootReducer.stepForm.color,
+  pathname: state.router.location.pathname,
 });
 
 const mapDispatchToProps = (dispatch : Dispatch) : DispatchProps => ({

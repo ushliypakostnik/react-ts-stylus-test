@@ -42,12 +42,12 @@ const initialState = {
 type State = Readonly<typeof initialState>;
 
 class StepForm extends React.Component<Props, State> {
-  private ref1 : null | HTMLInputElement = null;
-  private ref2 : null | HTMLInputElement = null;
-  private ref3 : null | HTMLInputElement = null;
-  private ref4 : null | HTMLInputElement = null;
-  private ref5 : null | HTMLTextAreaElement = null;
-  private ref6 : null | HTMLInputElement = null;
+  private refName : null | HTMLInputElement = null;
+  private refAmmount : null | HTMLInputElement = null;
+  private refOptions : null | HTMLInputElement = null;
+  private refCash : null | HTMLInputElement = null;
+  private refDescription : null | HTMLTextAreaElement = null;
+  private refDelivery : null | HTMLInputElement = null;
 
   public static getDerivedStateFromProps = (nextProps : Props, prevState : State) => ({
     stepForm: nextProps.stepForm,
@@ -56,12 +56,12 @@ class StepForm extends React.Component<Props, State> {
   readonly state : State = initialState;
 
   public componentDidMount() {
-    if (this.ref1) this.ref1.value = this.props.stepForm.name;
-    if (this.ref2) this.ref2.value = String(this.props.stepForm.ammount);
-    if (this.ref3) initRadios(this.ref3, this.props.stepForm.options);
-    if (this.ref4) initCheckbox(this.ref4, this.props.stepForm.cash);
-    if (this.ref5) this.ref5.value = this.props.stepForm.description;
-    if (this.ref6) initCheckbox(this.ref6, this.props.stepForm.delivery);
+    if (this.refName) this.refName.value = this.props.stepForm.name;
+    if (this.refAmmount) this.refAmmount.value = String(this.props.stepForm.ammount);
+    if (this.refOptions) initRadios(this.refOptions, this.props.stepForm.options);
+    if (this.refCash) initCheckbox(this.refCash, this.props.stepForm.cash);
+    if (this.refDescription) this.refDescription.value = this.props.stepForm.description;
+    if (this.refDelivery) initCheckbox(this.refDelivery, this.props.stepForm.delivery);
     this.checkDelivery();
   };
 
@@ -77,40 +77,41 @@ class StepForm extends React.Component<Props, State> {
     }
   };
 
+  // Common handle change for redux
   private handleChange = (key: string, value: any) : void => {
     this.props.setForm(key, value);
     this.checkDelivery();
   };
 
-  private handleChange1 = () => {
-    this.handleChange(Object.keys(FORM)[0], this.ref1.value);
+  private handleChangeName = () => {
+    this.handleChange(Object.keys(FORM)[0], this.refName.value);
   };
-  private handleChange2 = () => {
-    this.handleChange(Object.keys(FORM)[1], Number(this.ref2.value));
+  private handleChangeAmmount = () => {
+    this.handleChange(Object.keys(FORM)[1], Number(this.refAmmount.value));
   };
-  private handleChange3 = () => {
-    const value = this.ref3.getAttribute('data-value');
+  private handleChangeOptions = () => {
+    const value = this.refOptions.getAttribute('data-value');
     if (value && value !== '') this.handleChange(Object.keys(FORM)[2], value);
   };
-  private handleChange4 = (e) => {
-    const value = this.ref4.parentElement.parentElement.getAttribute('data-value');
+  private handleChangeCash = (e) => {
+    const value = this.refCash.parentElement.parentElement.getAttribute('data-value');
     const _value = value === 'true' ? true : false;
     this.handleChange(Object.keys(FORM)[3], _value);
   };
-  private handleChange5 = (color) => {
+  private handleChangeColor = (color) => {
     this.handleChange(Object.keys(FORM)[4], color);
   };
-  private handleChange6 = (height) => {
+  private handleChangeHeight = (height) => {
     this.handleChange(Object.keys(FORM)[5], height);
   };
-  private handleChange7 = () => {
-    this.handleChange(Object.keys(FORM)[6], this.ref5.value);
+  private handleChangeDescription = () => {
+    this.handleChange(Object.keys(FORM)[6], this.refDescription.value);
   };
-  private handleChange8 = (width) => {
+  private handleChangeWidth = (width) => {
     this.handleChange(Object.keys(FORM)[7], width);
   };
-  private handleChange9 = (e) => {
-    const value = this.ref6.parentElement.parentElement.getAttribute('data-value');
+  private handleChangeDelivery = (e) => {
+    const value = this.refDelivery.parentElement.parentElement.getAttribute('data-value');
     const _value = value === 'true' ? true : false;
     this.handleChange(Object.keys(FORM)[8], _value);
   };
@@ -122,29 +123,29 @@ class StepForm extends React.Component<Props, State> {
       <React.Fragment>
         {stepId === STEPS[0].id &&
           <Step1
-            handleChange1={ this.handleChange1 }
-            handleChange2={ this.handleChange2 }
-            handleChange3={ this.handleChange3 }
-            handleChange4={ this.handleChange4 }
-            ref1={ ref1 => (this.ref1 = ref1) }
-            ref2={ ref2 => (this.ref2 = ref2) }
-            ref3={ ref3 => (this.ref3 = ref3) }
-            ref4={ ref4 => (this.ref4 = ref4) }
+            handleChangeName={ this.handleChangeName }
+            handleChangeAmmount={ this.handleChangeAmmount }
+            handleChangeOptions={ this.handleChangeOptions }
+            handleChangeCash={ this.handleChangeCash }
+            refName={ refName => (this.refName = refName) }
+            refAmmount={ refAmmount => (this.refAmmount = refAmmount) }
+            refOptions={ refOptions => (this.refOptions = refOptions) }
+            refCash={ refCash => (this.refCash = refCash) }
           />}
         {stepId === STEPS[1].id &&
           <Step2
-            handleChange5={ this.handleChange5 }
-            handleChange6={ this.handleChange6 }
+            handleChangeColor={ this.handleChangeColor }
+            handleChangeHeight={ this.handleChangeHeight }
             initialDownshift1Value={ this.props.stepForm.color }
             initialSelect1Value={this.props.stepForm.height }
           />}
         {stepId === STEPS[2].id &&
           <Step3
-            handleChange7={ this.handleChange7 }
-            handleChange8={ this.handleChange8 }
-            handleChange9={ this.handleChange9 }
-            ref5={ ref5 => (this.ref5 = ref5) }
-            ref6={ ref6 => (this.ref6 = ref6) }
+            handleChangeDescription={ this.handleChangeDescription }
+            handleChangeWidth={ this.handleChangeWidth }
+            handleChangeDelivery={ this.handleChangeDelivery }
+            refDescription={ refDescription => (this.refDescription = refDescription) }
+            refDelivery={ refDelivery => (this.refDelivery = refDelivery) }
             initialSelect2Value={this.props.stepForm.width }
             delivery={ this.state.delivery }
             deliveryFromStore={ this.props.stepForm.delivery }

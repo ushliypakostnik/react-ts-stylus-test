@@ -6,14 +6,14 @@ import {
 } from '../utilities/_helpers';
 
 interface Props {
-  ref1 : React.Ref<HTMLInputElement>;
-  ref2 : React.Ref<HTMLInputElement>;
-  ref3 : React.Ref<HTMLInputElement>;
-  ref4 : React.Ref<HTMLInputElement>;
-  handleChange1 : React.ChangeEventHandler<HTMLInputElement>;
-  handleChange2 : React.ChangeEventHandler<HTMLInputElement>;
-  handleChange3 : React.ChangeEventHandler<HTMLInputElement>;
-  handleChange4 : React.MouseEventHandler<HTMLInputElement>;
+  refName : React.Ref<HTMLInputElement>;
+  refAmmount : React.Ref<HTMLInputElement>;
+  refOptions : React.Ref<HTMLInputElement>;
+  refCash : React.Ref<HTMLInputElement>;
+  handleChangeName : React.ChangeEventHandler<HTMLInputElement>;
+  handleChangeAmmount : React.ChangeEventHandler<HTMLInputElement>;
+  handleChangeOptions : React.ChangeEventHandler<HTMLInputElement>;
+  handleChangeCash : React.MouseEventHandler<HTMLInputElement>;
 };
 
 class Step1 extends React.Component<Props> {
@@ -27,8 +27,8 @@ class Step1 extends React.Component<Props> {
             id="name"
             type="text"
             placeholder="Enter product name"
-            ref={ this.props.ref1 }
-            onChange={ this.props.handleChange1 }
+            ref={ this.props.refName }
+            onChange={ this.props.handleChangeName }
           />
         </fieldset>
         <fieldset className="form__group">
@@ -37,8 +37,8 @@ class Step1 extends React.Component<Props> {
             id="amount"
             type="number"
             placeholder="Enter amount"
-            ref={ this.props.ref2 }
-            onChange={ this.props.handleChange2 }
+            ref={ this.props.refAmmount }
+            onChange={ this.props.handleChangeAmmount }
             onKeyDown={(e) => {
               if (['e', '+', '-'].includes(e.key)) {
                 e.preventDefault();
@@ -51,8 +51,8 @@ class Step1 extends React.Component<Props> {
           <div
             id="options"
             className="form__radios"
-            ref={ this.props.ref3 }
-            onChange={ this.props.handleChange3 }
+            ref={ this.props.refOptions }
+            onChange={ this.props.handleChangeOptions }
             onClick={(e) => { onClickRadios(e); }}
           >
             <label htmlFor="option1">A</label>
@@ -75,10 +75,10 @@ class Step1 extends React.Component<Props> {
               <input
                 type="checkbox"
                 id="cash"
-                ref={ this.props.ref4 }
+                ref={ this.props.refCash }
                 onClick={(e) => {
                   onClickCheckbox(e);
-                  this.props.handleChange4(e);
+                  this.props.handleChangeCash(e);
                 }}
               /><span>Cash payment ?</span>
             </div>

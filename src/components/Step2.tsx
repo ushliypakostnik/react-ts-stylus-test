@@ -5,10 +5,10 @@ import Select from 'react-select';
 import { CONTROLS } from '../store/constants';
 
 interface Props {
-  initialDownshift1Value: string;
-  initialSelect1Value: number;
-  handleChange5 : React.ChangeEventHandler<HTMLElement>;
-  handleChange6 : React.ChangeEventHandler<HTMLElement>;
+  initialDownshift1Value : string;
+  initialSelect1Value : number;
+  handleChangeColor : React.ChangeEventHandler<HTMLElement>;
+  handleChangeHeight : React.ChangeEventHandler<HTMLElement>;
 };
 
 class Step2 extends React.Component<Props> {
@@ -22,7 +22,7 @@ class Step2 extends React.Component<Props> {
         <fieldset className="form__group form__downshift">
           <Downshift
               onChange={selection => {
-                this.props.handleChange5(selection.value);
+                this.props.handleChangeColor(selection.value);
               }}
               itemToString={item => (item ? item.value : '') }
               initialInputValue={ this.props.initialDownshift1Value }
@@ -85,7 +85,7 @@ class Step2 extends React.Component<Props> {
             isSearchable={false}
             defaultValue={ _initialSelectValue }
             onChange={selection => {
-              this.props.handleChange6(selection.value);
+              this.props.handleChangeHeight(selection.value);
             }}
           />
         </fieldset>

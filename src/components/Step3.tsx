@@ -8,12 +8,12 @@ import {
 } from '../utilities/_helpers';
 
 interface Props {
-  ref5 : React.Ref<HTMLTextAreaElement>;
-  ref6 : React.Ref<HTMLInputElement>;
+  refDescription : React.Ref<HTMLTextAreaElement>;
+  refDelivery : React.Ref<HTMLInputElement>;
   initialSelect2Value: number;
-  handleChange7 : React.ChangeEventHandler<HTMLTextAreaElement>;
-  handleChange8 : React.ChangeEventHandler<HTMLInputElement>;
-  handleChange9 : React.MouseEventHandler<HTMLInputElement>;
+  handleChangeDescription : React.ChangeEventHandler<HTMLTextAreaElement>;
+  handleChangeWidth : React.ChangeEventHandler<HTMLInputElement>;
+  handleChangeDelivery : React.MouseEventHandler<HTMLInputElement>;
   delivery: boolean;
   deliveryFromStore: boolean;
 };
@@ -45,8 +45,8 @@ class Step3 extends React.Component<Props> {
           <textarea
             id="description"
             placeholder="Enter product description"
-            ref={ this.props.ref5 }
-            onChange={ this.props.handleChange7 }
+            ref={ this.props.refDescription }
+            onChange={ this.props.handleChangeDescription }
           ></textarea>
         </fieldset>
         <fieldset className="form__group">
@@ -60,7 +60,7 @@ class Step3 extends React.Component<Props> {
             isSearchable={false}
             defaultValue={ _initialSelectValue }
             onChange={selection => {
-              this.props.handleChange8(selection.value);
+              this.props.handleChangeWidth(selection.value);
             }}
           />
         </fieldset>
@@ -74,10 +74,10 @@ class Step3 extends React.Component<Props> {
                 <input
                   type="checkbox"
                   id="delivery"
-                  ref={ this.props.ref6 }
+                  ref={ this.props.refDelivery }
                   onClick={(e) => {
                     onClickCheckbox(e);
-                    this.props.handleChange9(e);
+                    this.props.handleChangeDelivery(e);
                   }}
                 /><span>Need delivery ?</span>
               </div>
